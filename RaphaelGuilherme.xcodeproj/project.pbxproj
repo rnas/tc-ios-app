@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B95C9CA71E8F385600E8FA87 /* Import APP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Import APP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B95C9CA71E8F385600E8FA87 /* RaphaelGuilherme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaphaelGuilherme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95C9CAA1E8F385600E8FA87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95C9CAC1E8F385600E8FA87 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B95C9CAF1E8F385600E8FA87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		B95C9CA81E8F385600E8FA87 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B95C9CA71E8F385600E8FA87 /* Import APP.app */,
+				B95C9CA71E8F385600E8FA87 /* RaphaelGuilherme.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,9 +70,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B95C9CA61E8F385600E8FA87 /* Import APP */ = {
+		B95C9CA61E8F385600E8FA87 /* RaphaelGuilherme */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B95C9CBC1E8F385600E8FA87 /* Build configuration list for PBXNativeTarget "Import APP" */;
+			buildConfigurationList = B95C9CBC1E8F385600E8FA87 /* Build configuration list for PBXNativeTarget "RaphaelGuilherme" */;
 			buildPhases = (
 				B95C9CA31E8F385600E8FA87 /* Sources */,
 				B95C9CA41E8F385600E8FA87 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = "Import APP";
+			name = RaphaelGuilherme;
 			productName = "Import APP";
-			productReference = B95C9CA71E8F385600E8FA87 /* Import APP.app */;
+			productReference = B95C9CA71E8F385600E8FA87 /* RaphaelGuilherme.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -104,7 +104,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B95C9CA21E8F385600E8FA87 /* Build configuration list for PBXProject "Import APP" */;
+			buildConfigurationList = B95C9CA21E8F385600E8FA87 /* Build configuration list for PBXProject "RaphaelGuilherme" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -117,7 +117,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B95C9CA61E8F385600E8FA87 /* Import APP */,
+				B95C9CA61E8F385600E8FA87 /* RaphaelGuilherme */,
 			);
 		};
 /* End PBXProject section */
@@ -288,7 +288,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B95C9CA21E8F385600E8FA87 /* Build configuration list for PBXProject "Import APP" */ = {
+		B95C9CA21E8F385600E8FA87 /* Build configuration list for PBXProject "RaphaelGuilherme" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B95C9CBA1E8F385600E8FA87 /* Debug */,
@@ -297,7 +297,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B95C9CBC1E8F385600E8FA87 /* Build configuration list for PBXNativeTarget "Import APP" */ = {
+		B95C9CBC1E8F385600E8FA87 /* Build configuration list for PBXNativeTarget "RaphaelGuilherme" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B95C9CBD1E8F385600E8FA87 /* Debug */,
