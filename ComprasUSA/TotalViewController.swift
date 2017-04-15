@@ -1,14 +1,14 @@
 //
-//  ConfigViewController.swift
+//  TotalViewController.swift
 //  RaphaelGuilherme
 //
-//  Created by Usuário Convidado on 05/04/17.
+//  Created by rnas on 15/04/17.
 //  Copyright © 2017 Fiap. All rights reserved.
 //
 
 import UIKit
 
-class ConfigViewController: UIViewController {
+class TotalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

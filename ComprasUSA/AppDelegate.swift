@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Import APP
+//  ComprasUSA
 //
-//  Created by rnas on 31/03/17.
+//  Created by rnas on 15/04/17.
 //  Copyright © 2017 Fiap. All rights reserved.
 //
 
@@ -13,12 +13,19 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        
+        if UserDefaults.standard.value(forKey: SettingsType.iof.rawValue) == nil {
+            
+            UserDefaults.standard.set("3.00", forKey: SettingsType.dolar.rawValue)
+            UserDefaults.standard.set("3.00", forKey: SettingsType.iof.rawValue)
+        }
+
         return true
     }
 
@@ -55,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "RaphaelGuilherme")
+        let container = NSPersistentContainer(name: "ComprasUSA")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
