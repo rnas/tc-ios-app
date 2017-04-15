@@ -34,6 +34,8 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // TODO reverse process
+        
         if let iof = UserDefaults.standard.string(forKey: SettingsType.iof.rawValue) {
             txIOF.text = iof
         }
@@ -60,9 +62,19 @@ class SettingsViewController: UIViewController {
         }
 
         alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { (UIAlertAction) in
+
+            // TODO validate
             
-//            alert.textFields[0].text
-//            alert.textFields[1].text
+            let state = State(context: self.context)
+            state.name = alert.textFields?[0].text
+            state.tax  = Double((alert.textFields?[1].text)!)!
+            
+            do {
+                try self.context.save()
+                self.loadData()
+            } catch {
+                print(error.localizedDescription)
+            }
             
         }))
     
@@ -71,7 +83,6 @@ class SettingsViewController: UIViewController {
         present(alert, animated: true, completion: nil)
         
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -103,10 +114,36 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell  : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let state : State = fetchedResultController.object(at: indexPath)
+        
+        cell.textLabel?.text = state.name
+        cell.detailTextLabel?.text = "\(state.tax)"
+        cell.detailTextLabel?.tintColor = .red
         
         return cell
+        
+    }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return [UITableViewRowAction.init(style: .destructive, title: "Delete", handler: { (action : UITableViewRowAction, indexPath : IndexPath) in
+            
+            let state = self.fetchedResultController.object(at: indexPath)
+            self.context.delete(state)
+            
+            do {
+                try self.context.save()
+            } catch {
+                print("Unable to delete Item")
+            }
+            
+            tableView.reloadData()
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+        })]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
