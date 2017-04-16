@@ -142,7 +142,6 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             }
             
             tableView.reloadData()
-//            tableView.deleteRows(at: [indexPath], with: .fade)
         })]
     }
     

@@ -318,7 +318,7 @@
                                     <constraint firstAttribute="width" constant="25" id="QTI-NG-tVx"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="addEstado:" destination="8G6-C5-qnx" eventType="touchUpInside" id="FwC-Aq-QYE"/>
+                                    <segue destination="tv7-4z-oMX" kind="show" id="s9g-h9-Pdt"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Valor US$" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRd-sP-CHJ">
@@ -345,7 +345,7 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="CADASTRAR"/>
                                 <connections>
-                                    <action selector="addProduto:" destination="8G6-C5-qnx" eventType="touchUpInside" id="ot9-tI-cb5"/>
+                                    <action selector="addProduct:" destination="8G6-C5-qnx" eventType="touchUpInside" id="JWC-Id-vIB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TvR-6u-3Cf">
@@ -385,11 +385,12 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="btnAdd" destination="LZk-t0-CWG" id="FMC-23-8nO"/>
-                        <outlet property="swCartao" destination="MIB-Sx-m1Q" id="3Yk-P0-g0i"/>
-                        <outlet property="tfEstados" destination="FP0-a0-3ny" id="Cqq-uk-ZB0"/>
-                        <outlet property="tfNome" destination="QsO-uA-Xfc" id="YMe-hl-j7k"/>
-                        <outlet property="tfPreco" destination="pRd-sP-CHJ" id="z0l-H6-1pB"/>
+                        <outlet property="btImage" destination="TvR-6u-3Cf" id="LPm-ee-Juj"/>
+                        <outlet property="ivImage" destination="iDX-yr-7BN" id="LId-1U-8fa"/>
+                        <outlet property="txName" destination="QsO-uA-Xfc" id="guQ-IU-IUh"/>
+                        <outlet property="txState" destination="FP0-a0-3ny" id="Via-3Z-orI"/>
+                        <outlet property="txValue" destination="pRd-sP-CHJ" id="qcZ-dv-cNw"/>
+                        <outlet property="usingCard" destination="MIB-Sx-m1Q" id="NIZ-Qc-uPN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HFS-4w-sUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -440,4 +441,7 @@
         <image name="icheckout" width="22" height="22"/>
         <image name="isettings" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="s9g-h9-Pdt"/>
+    </inferredMetricsTieBreakers>
 </document>

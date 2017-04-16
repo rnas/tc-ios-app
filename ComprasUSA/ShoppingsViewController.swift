@@ -61,9 +61,35 @@ extension ShoppingsViewController : UITableViewDelegate, UITableViewDataSource {
 
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return [UITableViewRowAction.init(style: .destructive, title: "Delete", handler: { (action : UITableViewRowAction, indexPath : IndexPath) in
+            
+            let product = self.fetchedResultController.object(at: indexPath)
+            self.context.delete(product)
+            
+            do {
+                try self.context.save()
+            } catch {
+                print("Unable to delete Item")
+            }
+            
+            tableView.reloadData()
+        })]
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        let product : Product = fetchedResultController.object(at: indexPath)
+        
+        cell.textLabel?.text = product.name
+        cell.detailTextLabel?.text = "US$ \(product.price)"
         
         return cell
         

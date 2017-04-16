@@ -7,29 +7,47 @@
 //
 
 import UIKit
+import CoreData
 
 class ProductViewController: UIViewController {
 
+    @IBOutlet var txName: UITextField!
+    @IBOutlet var ivImage: UIImageView!
+    @IBOutlet var btImage: UIButton!
+    @IBOutlet var txState: UITextField!
+    @IBOutlet var txValue: UITextField!
+    @IBOutlet var usingCard: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func addProduct(_ sender: Any) {
+        
+        let product = Product(context: self.context)
+        
+        product.name = txName.text
+        product.state = nil
+        product.price = Double(txValue.text!)!
+        product.usedCard = usingCard.isOn
+        product.image = nil
+        
+        do {
+            try context.save()
+            self.navigationController?.popViewController(animated: true)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
