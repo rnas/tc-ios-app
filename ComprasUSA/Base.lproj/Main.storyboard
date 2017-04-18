@@ -299,7 +299,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iDX-yr-7BN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gc.png" translatesAutoresizingMaskIntoConstraints="NO" id="iDX-yr-7BN">
                                 <rect key="frame" x="20" y="134" width="335" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="Rsm-UY-3l5"/>
@@ -443,6 +443,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gc.png" width="600" height="358"/>
         <image name="icart" width="22" height="22"/>
         <image name="icheckout" width="22" height="22"/>
         <image name="isettings" width="22" height="22"/>

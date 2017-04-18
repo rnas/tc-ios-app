@@ -19,6 +19,7 @@
 		B923A8BB1EA29A8C00310CA0 /* TotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B923A8BA1EA29A8C00310CA0 /* TotalViewController.swift */; };
 		B923A8BE1EA29DCD00310CA0 /* UIViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B923A8BD1EA29DCD00310CA0 /* UIViewController+CoreData.swift */; };
 		B923A8C21EA2C7B400310CA0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B923A8C11EA2C7B400310CA0 /* Settings.bundle */; };
+		B923A8C41EA5A3B300310CA0 /* gc.png in Resources */ = {isa = PBXBuildFile; fileRef = B923A8C31EA5A3B300310CA0 /* gc.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		B923A8BA1EA29A8C00310CA0 /* TotalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalViewController.swift; sourceTree = "<group>"; };
 		B923A8BD1EA29DCD00310CA0 /* UIViewController+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreData.swift"; sourceTree = "<group>"; };
 		B923A8C11EA2C7B400310CA0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		B923A8C31EA5A3B300310CA0 /* gc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gc.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				B923A89F1EA298EE00310CA0 /* ViewController.swift */,
 				B923A8A11EA298EE00310CA0 /* Main.storyboard */,
 				B923A8A71EA298EE00310CA0 /* Assets.xcassets */,
+				B923A8C31EA5A3B300310CA0 /* gc.png */,
 				B923A8A91EA298EE00310CA0 /* LaunchScreen.storyboard */,
 				B923A8AC1EA298EE00310CA0 /* Info.plist */,
 				B923A8C11EA2C7B400310CA0 /* Settings.bundle */,
@@ -169,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B923A8C41EA5A3B300310CA0 /* gc.png in Resources */,
 				B923A8C21EA2C7B400310CA0 /* Settings.bundle in Resources */,
 				B923A8AB1EA298EE00310CA0 /* LaunchScreen.storyboard in Resources */,
 				B923A8A81EA298EE00310CA0 /* Assets.xcassets in Resources */,

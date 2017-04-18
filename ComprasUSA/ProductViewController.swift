@@ -18,6 +18,10 @@ class ProductViewController: UIViewController {
     @IBOutlet var txValue: UITextField!
     @IBOutlet var usingCard: UISwitch!
     
+    let pickerView = UIPickerView()
+    
+    var pickOption = ["c1", "c2", "c3", "c4"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,9 +82,31 @@ class ProductViewController: UIViewController {
     
     
     @IBAction func selectState(_ sender: Any) {
+    
+        let toolbar = UIToolbar()
         
+        toolbar.backgroundColor = .white
+        toolbar.isTranslucent = false
+        toolbar.barStyle = .default
+        toolbar.sizeToFit()
+        toolbar.items = [
+            UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: nil),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Selecionar", style: .done, target: self, action: #selector(ProductViewController.pickerviewSelected))
+        ]
         
+        pickerView.delegate = self
         
+        txState.inputAccessoryView = toolbar
+        txState.inputView = pickerView
+
+        
+    }
+    
+    func pickerviewSelected() {
+        txState.resignFirstResponder()
+        txState.text = pickOption[pickerView.selectedRow(inComponent: 0)]
+        print("OWOWOW")
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,6 +115,27 @@ class ProductViewController: UIViewController {
     }
     
 
+}
+
+extension ProductViewController : UIPickerViewDelegate, UIPickerViewDataSource {
+   
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickOption.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickOption[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        txState.text = pickOption[row]
+        txState.resignFirstResponder()
+    }
+    
 }
 
 
