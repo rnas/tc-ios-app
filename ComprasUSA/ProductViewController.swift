@@ -33,7 +33,7 @@ class ProductViewController: UIViewController {
         product.price = Double(txValue.text!)!
         product.usedCard = usingCard.isOn
         product.image = nil
-        
+    
         do {
             try context.save()
             self.navigationController?.popViewController(animated: true)
@@ -44,10 +44,71 @@ class ProductViewController: UIViewController {
     }
     
     
+    @IBAction func selectImage(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Selecionar Imagem", message: "De onde você deseja escolher a imagem do produto?", preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Câmera", style: .default) { (action : UIAlertAction) in
+            self.selectPicture(sourceType: .camera)
+        }
+        
+        alert.addAction(cameraAction)
+        
+        let libraryAction = UIAlertAction(title: "Galeria", style: .default) { (action : UIAlertAction) in
+            self.selectPicture(sourceType: .photoLibrary)
+        }
+        
+        alert.addAction(libraryAction)
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func selectPicture(sourceType : UIImagePickerControllerSourceType) {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    
+    @IBAction func selectState(_ sender: Any) {
+        
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 
+}
+
+
+extension ProductViewController :  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        //Reduzir imagem
+        let smallSize = CGSize(width: 300, height: 280)
+        UIGraphicsBeginImageContext(smallSize)
+        
+        image.draw(in: CGRect(x: 0, y: 0, width: smallSize.width, height: smallSize.height))
+        
+        let smallImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        ivImage.image = smallImage
+        
+        dismiss(animated: true, completion: nil)
+    }
+
+    
 }

@@ -310,6 +310,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="selectState:" destination="8G6-C5-qnx" eventType="editingDidBegin" id="tDh-Z5-Pej"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZME-uo-Z07">
                                 <rect key="frame" x="330" y="334" width="25" height="25"/>
@@ -350,6 +353,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TvR-6u-3Cf">
                                 <rect key="frame" x="20" y="134" width="335" height="180"/>
+                                <connections>
+                                    <action selector="selectImage:" destination="8G6-C5-qnx" eventType="touchUpInside" id="EfG-UZ-tGP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
