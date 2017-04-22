@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+protocol ProductUpdatedDelegate {
+    func productsUpdated()
+}
+
 class ProductViewController: UIViewController {
 
     @IBOutlet var txName: UITextField!
@@ -20,23 +24,51 @@ class ProductViewController: UIViewController {
     
     let pickerView = UIPickerView()
     
-    var pickOption = ["c1", "c2", "c3", "c4"]
+    var delegate : ProductUpdatedDelegate?
+    var product : Product?
+    var state : State!
+    
+    var fetchedResultController: NSFetchedResultsController<State>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if product == nil {
+            return
+        } else {
+            
+            txName.text = product!.name
+            txValue.text = "\(product!.price)"
+            usingCard.isOn = product!.usedCard
+            
+            if ((product!.image) != nil) {
+                ivImage.image = product!.image as! UIImage
+            }
+            
+            if (product!.state != nil) {
+                txState.text = product!.state?.name
+                state = product?.state
+            }
+        }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadCategoriesData()
+    }
+    
     @IBAction func addProduct(_ sender: Any) {
         
-        let product = Product(context: self.context)
+        if product == nil {
+            product = Product(context: self.context)
+        }
         
-        product.name = txName.text
-        product.state = nil
-        product.price = Double(txValue.text!)!
-        product.usedCard = usingCard.isOn
-        product.image = nil
+        product?.name = txName.text
+        product?.price = Double(txValue.text!)!
+        product?.usedCard = usingCard.isOn
+        product?.image = ivImage.image
+        product?.state = state
     
         do {
             try context.save()
@@ -81,6 +113,23 @@ class ProductViewController: UIViewController {
     }
     
     
+    func loadCategoriesData() {
+        
+        let fetchRequest: NSFetchRequest<State> = State.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "tax", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultController.delegate = self
+        
+        do {
+            try fetchedResultController.performFetch()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     @IBAction func selectState(_ sender: Any) {
     
         let toolbar = UIToolbar()
@@ -99,22 +148,25 @@ class ProductViewController: UIViewController {
         
         txState.inputAccessoryView = toolbar
         txState.inputView = pickerView
-
-        
     }
     
     func pickerviewSelected() {
         txState.resignFirstResponder()
-        txState.text = pickOption[pickerView.selectedRow(inComponent: 0)]
-        print("OWOWOW")
+        txState.text = fetchedResultController.fetchedObjects?[pickerView.selectedRow(inComponent: 0)].name
+        state = fetchedResultController.fetchedObjects?[pickerView.selectedRow(inComponent: 0)]
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
 
+extension ProductViewController : NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
+        //        tableView.reloadData()
+    }
 }
 
 extension ProductViewController : UIPickerViewDelegate, UIPickerViewDataSource {
@@ -124,18 +176,12 @@ extension ProductViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickOption.count
+        return (fetchedResultController.fetchedObjects?.count)!
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickOption[row]
+        return fetchedResultController.fetchedObjects?[row].name
     }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        txState.text = pickOption[row]
-        txState.resignFirstResponder()
-    }
-    
 }
 
 
@@ -156,6 +202,6 @@ extension ProductViewController :  UIImagePickerControllerDelegate, UINavigation
         
         dismiss(animated: true, completion: nil)
     }
-
-    
 }
+
+

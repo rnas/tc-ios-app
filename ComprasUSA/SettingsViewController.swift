@@ -118,7 +118,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
         let state : State = fetchedResultController.object(at: indexPath)
         
         cell.textLabel?.text = state.name
-        cell.detailTextLabel?.text = "\(state.tax)"
+        cell.detailTextLabel?.text = "\(state.tax)%"
         cell.detailTextLabel?.tintColor = .red
         
         return cell
@@ -152,6 +152,43 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
         } else {
             return 0
         }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let state = fetchedResultController.object(at: indexPath)
+        
+        let alert = UIAlertController(title: "Adicionar Estado", message: "Preencha os campos abaixo", preferredStyle: .alert)
+        alert.addTextField { (UITextField) in
+            UITextField.placeholder = "Nome do Estado"
+            UITextField.keyboardType = .default
+            UITextField.text = state.name
+        }
+        alert.addTextField { (UITextField) in
+            UITextField.placeholder = "Taxas do Estado"
+            UITextField.keyboardType = .numbersAndPunctuation
+            UITextField.text = "\(state.tax)"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { (UIAlertAction) in
+            
+            // TODO validate
+            
+            state.name = alert.textFields?[0].text
+            state.tax  = Double((alert.textFields?[1].text)!)!
+            
+            do {
+                try self.context.save()
+                self.loadData()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
         
     }
     

@@ -12,7 +12,8 @@ import CoreData
 class ShoppingsViewController: UIViewController {
 
     var fetchedResultController: NSFetchedResultsController<Product>!
-
+    let fmt : NumberFormatter = NumberFormatter()
+    
     @IBOutlet var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -21,14 +22,10 @@ class ShoppingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        fmt.numberStyle = .currency
+        fmt.currencyCode = "USD"
+        
         loadData()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
@@ -65,6 +62,19 @@ extension ShoppingsViewController : UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //  
+        let vc = storyboard?.instantiateViewController(withIdentifier: "edit") as! ProductViewController
+        
+        vc.product = self.fetchedResultController.object(at: indexPath)
+        vc.delegate = self
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+        
+    }
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         return [UITableViewRowAction.init(style: .destructive, title: "Delete", handler: { (action : UITableViewRowAction, indexPath : IndexPath) in
             
@@ -89,13 +99,25 @@ extension ShoppingsViewController : UITableViewDelegate, UITableViewDataSource {
         let product : Product = fetchedResultController.object(at: indexPath)
         
         cell.textLabel?.text = product.name
-        cell.detailTextLabel?.text = "US$ \(product.price)"
+        if let image = product.image as? UIImage {
+            cell.imageView?.image = image
+            cell.imageView?.clipsToBounds = true
+            cell.imageView?.layer.cornerRadius = 22
+        }
+        
+        let USD = NSNumber(value: product.price)
+        cell.detailTextLabel?.text = fmt.string(from: USD)
         
         return cell
         
     }
 }
 
+extension ShoppingsViewController: ProductUpdatedDelegate {
+    func productsUpdated() {
+        loadData()
+    }
+}
 
 extension ShoppingsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
