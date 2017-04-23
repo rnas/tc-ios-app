@@ -23,10 +23,10 @@ class ProductViewController: UIViewController {
     @IBOutlet var usingCard: UISwitch!
     
     let pickerView = UIPickerView()
-    
+    var image    : UIImage!
     var delegate : ProductUpdatedDelegate?
-    var product : Product?
-    var state : State!
+    var product  : Product?
+    var state    : State!
     
     var fetchedResultController: NSFetchedResultsController<State>!
     
@@ -42,7 +42,8 @@ class ProductViewController: UIViewController {
             usingCard.isOn = product!.usedCard
             
             if ((product!.image) != nil) {
-                ivImage.image = product!.image as! UIImage
+                image = product!.image as! UIImage
+                ivImage.image = image                
             }
             
             if (product!.state != nil) {
@@ -83,9 +84,9 @@ class ProductViewController: UIViewController {
             errorMessage(error: "Selecione um estado")
         }
         
-//        if ivImage.image == nil {
-//            errorMessage(error: "Selecione uma imagem")
-//        }
+        if image == nil {
+            errorMessage(error: "Selecione uma imagem")
+        }
         
         product?.name = txName.text
         product?.price = Double(txValue.text!)!
@@ -116,11 +117,14 @@ class ProductViewController: UIViewController {
         
         let alert = UIAlertController(title: "Selecionar Imagem", message: "De onde você deseja escolher a imagem do produto?", preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        let cameraAction = UIAlertAction(title: "Câmera", style: .default) { (action : UIAlertAction) in
-            self.selectPicture(sourceType: .camera)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            
+            let cameraAction = UIAlertAction(title: "Câmera", style: .default) { (action : UIAlertAction) in
+                self.selectPicture(sourceType: .camera)
+            }
+            
+            alert.addAction(cameraAction)
         }
-        
-        alert.addAction(cameraAction)
         
         let libraryAction = UIAlertAction(title: "Galeria", style: .default) { (action : UIAlertAction) in
             self.selectPicture(sourceType: .photoLibrary)
@@ -242,6 +246,7 @@ extension ProductViewController :  UIImagePickerControllerDelegate, UINavigation
         UIGraphicsEndImageContext()
         
         ivImage.image = smallImage
+        self.image = smallImage
         
         dismiss(animated: true, completion: nil)
     }
