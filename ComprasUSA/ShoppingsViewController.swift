@@ -27,7 +27,7 @@ class ShoppingsViewController: UIViewController {
         
         lbError = UILabel(frame: tableView.frame)
         lbError.textAlignment = .center
-        lbError.text = "Nenhum ítem cadastrado"
+        lbError.text = "Sua lista está vazia!"
         lbError.layer.opacity = 0
         
         tableView.backgroundView = lbError
