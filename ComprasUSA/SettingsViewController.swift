@@ -151,6 +151,8 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             let state = self.fetchedResultController.object(at: indexPath)
             self.context.delete(state)
             
+            // TODO : Delete all products with this state
+            
             do {
                 try self.context.save()
             } catch {

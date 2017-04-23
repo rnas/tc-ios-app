@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B923A89E1EA298EE00310CA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B923A89D1EA298EE00310CA0 /* AppDelegate.swift */; };
-		B923A8A01EA298EE00310CA0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B923A89F1EA298EE00310CA0 /* ViewController.swift */; };
 		B923A8A31EA298EE00310CA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B923A8A11EA298EE00310CA0 /* Main.storyboard */; };
 		B923A8A61EA298EE00310CA0 /* ComprasUSA.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B923A8A41EA298EE00310CA0 /* ComprasUSA.xcdatamodeld */; };
 		B923A8A81EA298EE00310CA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B923A8A71EA298EE00310CA0 /* Assets.xcassets */; };
@@ -25,7 +24,6 @@
 /* Begin PBXFileReference section */
 		B923A89A1EA298EE00310CA0 /* ComprasUSA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComprasUSA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B923A89D1EA298EE00310CA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B923A89F1EA298EE00310CA0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B923A8A21EA298EE00310CA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B923A8A51EA298EE00310CA0 /* ComprasUSA.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ComprasUSA.xcdatamodel; sourceTree = "<group>"; };
 		B923A8A71EA298EE00310CA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,7 +72,6 @@
 				B923A8B31EA2997900310CA0 /* Model */,
 				B923A8B21EA2996D00310CA0 /* Controller */,
 				B923A89D1EA298EE00310CA0 /* AppDelegate.swift */,
-				B923A89F1EA298EE00310CA0 /* ViewController.swift */,
 				B923A8A11EA298EE00310CA0 /* Main.storyboard */,
 				B923A8A71EA298EE00310CA0 /* Assets.xcassets */,
 				B923A8C31EA5A3B300310CA0 /* gc.png */,
@@ -188,7 +185,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B923A8BB1EA29A8C00310CA0 /* TotalViewController.swift in Sources */,
-				B923A8A01EA298EE00310CA0 /* ViewController.swift in Sources */,
 				B923A8A61EA298EE00310CA0 /* ComprasUSA.xcdatamodeld in Sources */,
 				B923A8B51EA29A4B00310CA0 /* ShoppingsViewController.swift in Sources */,
 				B923A8B71EA29A6800310CA0 /* ProductViewController.swift in Sources */,
