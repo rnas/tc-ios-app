@@ -33,9 +33,7 @@ class SettingsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // TODO reverse process
-        
+    
         if let iof = UserDefaults.standard.string(forKey: SettingsType.iof.rawValue) {
             txIOF.text = iof
         }
@@ -43,10 +41,25 @@ class SettingsViewController: UIViewController {
         if let dolar = UserDefaults.standard.string(forKey: SettingsType.dolar.rawValue) {
             txDolar.text = dolar
         }
-        
     }
     
     
+    @IBAction func saveInfo(_ sender: Any) {
+        
+        if (Double(((txIOF.text))!)) != nil {
+            UserDefaults.standard.set(txIOF.text, forKey: SettingsType.iof.rawValue)
+        } else {
+            errorMessage(error: "Valor inválido para o campo IOF")
+        }
+        
+        if (Double(((txDolar.text))!)) != nil {
+            UserDefaults.standard.set(txDolar.text, forKey: SettingsType.dolar.rawValue)
+        } else {
+            errorMessage(error: "Valor inválido para o campo Dolar")
+        }
+        
+        errorMessage(error: "Valores atualizados com sucesso", title: "Pronto")
+    }
     
     @IBAction func addState(_ sender: Any) {
         
@@ -62,8 +75,16 @@ class SettingsViewController: UIViewController {
         }
 
         alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { (UIAlertAction) in
-
-            // TODO validate
+            
+            if alert.textFields?[0].text?.characters.count == 0 {
+                self.errorMessage(error: "Preencha os dois campos")
+                return
+            }
+            
+            if (Double(((alert.textFields?[1].text))!)) == nil {
+                self.errorMessage(error: "Preencha o campo imposto com um valor numérico")
+                return
+            }
             
             let state = State(context: self.context)
             state.name = alert.textFields?[0].text
@@ -82,11 +103,6 @@ class SettingsViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
         
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 }
@@ -173,7 +189,15 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
         
         alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { (UIAlertAction) in
             
-            // TODO validate
+            if alert.textFields?[0].text?.characters.count == 0 {
+                self.errorMessage(error: "Preencha os dois campos")
+                return
+            }
+            
+            if (Double(((alert.textFields?[1].text))!)) == nil {
+                self.errorMessage(error: "Preencha o campo imposto com um valor numérico")
+                return
+            }
             
             state.name = alert.textFields?[0].text
             state.tax  = Double((alert.textFields?[1].text)!)!
@@ -191,6 +215,17 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
         present(alert, animated: true, completion: nil)
         
     }
+    
+    func errorMessage(error : String, title : String = "Erro") {
+        
+        let alert = UIAlertController(title: title, message: error, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+
     
 }
 

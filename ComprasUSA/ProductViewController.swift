@@ -64,6 +64,29 @@ class ProductViewController: UIViewController {
             product = Product(context: self.context)
         }
         
+        if txName.text?.characters.count == 0 {
+            errorMessage(error: "Preencha o campo produto")
+            return
+        }
+        
+        if txValue.text?.characters.count == 0 {
+            errorMessage(error: "Preencha o campo preço")
+            return
+        }
+        
+        if (Double(((txValue.text))!)) == nil {
+            errorMessage(error: "Preencha o campo preço com um valor numérico")
+            return
+        }
+        
+        if state == nil {
+            errorMessage(error: "Selecione um estado")
+        }
+        
+//        if ivImage.image == nil {
+//            errorMessage(error: "Selecione uma imagem")
+//        }
+        
         product?.name = txName.text
         product?.price = Double(txValue.text!)!
         product?.usedCard = usingCard.isOn
@@ -79,6 +102,15 @@ class ProductViewController: UIViewController {
         
     }
     
+    func errorMessage(error : String) {
+        
+        let alert = UIAlertController(title: "Erro", message: error, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
     @IBAction func selectImage(_ sender: Any) {
         
@@ -131,6 +163,18 @@ class ProductViewController: UIViewController {
     }
     
     @IBAction func selectState(_ sender: Any) {
+        
+        if (fetchedResultController.fetchedObjects?.count == 0) || fetchedResultController.fetchedObjects == nil {
+
+            let alert = UIAlertController(title: "Atenção", message: "Nenhum Estado encontrado, adicione estados antes de selecionar", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+            present(alert, animated: true, completion: { 
+                self.txState.resignFirstResponder()
+            })
+            
+            return
+        }
     
         let toolbar = UIToolbar()
         
@@ -139,7 +183,7 @@ class ProductViewController: UIViewController {
         toolbar.barStyle = .default
         toolbar.sizeToFit()
         toolbar.items = [
-            UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: nil),
+            UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(ProductViewController.dismissPickerView)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             UIBarButtonItem(title: "Selecionar", style: .done, target: self, action: #selector(ProductViewController.pickerviewSelected))
         ]
@@ -150,15 +194,14 @@ class ProductViewController: UIViewController {
         txState.inputView = pickerView
     }
     
+    func dismissPickerView() {
+        txState.resignFirstResponder()
+    }
+    
     func pickerviewSelected() {
         txState.resignFirstResponder()
         txState.text = fetchedResultController.fetchedObjects?[pickerView.selectedRow(inComponent: 0)].name
         state = fetchedResultController.fetchedObjects?[pickerView.selectedRow(inComponent: 0)]
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 

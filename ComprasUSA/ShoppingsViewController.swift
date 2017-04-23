@@ -13,7 +13,7 @@ class ShoppingsViewController: UIViewController {
 
     var fetchedResultController: NSFetchedResultsController<Product>!
     let fmt : NumberFormatter = NumberFormatter()
-    
+    var lbError : UILabel!
     @IBOutlet var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -24,6 +24,13 @@ class ShoppingsViewController: UIViewController {
         
         fmt.numberStyle = .currency
         fmt.currencyCode = "USD"
+        
+        lbError = UILabel(frame: tableView.frame)
+        lbError.textAlignment = .center
+        lbError.text = "Nenhum ítem cadastrado"
+        lbError.layer.opacity = 0
+        
+        tableView.backgroundView = lbError
         
         loadData()
     }
@@ -51,8 +58,10 @@ extension ShoppingsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let count : Int = fetchedResultController.fetchedObjects?.count {
+            lbError.layer.opacity = (count > 0) ? 0 : 1
             return count
         } else {
+            lbError.layer.opacity = 1
             return 0
         }
 
@@ -64,14 +73,12 @@ extension ShoppingsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //  
         let vc = storyboard?.instantiateViewController(withIdentifier: "edit") as! ProductViewController
         
         vc.product = self.fetchedResultController.object(at: indexPath)
         vc.delegate = self
         
         navigationController?.pushViewController(vc, animated: true)
-        
         
     }
     
@@ -111,6 +118,9 @@ extension ShoppingsViewController : UITableViewDelegate, UITableViewDataSource {
         return cell
         
     }
+    
+    
+    
 }
 
 extension ShoppingsViewController: ProductUpdatedDelegate {

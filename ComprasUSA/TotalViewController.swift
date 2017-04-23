@@ -18,8 +18,6 @@ class TotalViewController: UIViewController {
     var dolar  : Double = 0
     
     var dataSource : [Product] = []
-//    var fetchedResultController: NSFetchedResultsController<Product>!
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -68,27 +66,8 @@ class TotalViewController: UIViewController {
         lbRS.text = fmt.string(from: BRL)
         
         let USD = NSNumber(value: totalDolars)
-        
         fmt.currencyCode = "USD"
         lbUS.text = fmt.string(from: USD)
         
     }
 }
-
-
-//
-//extension TotalViewController : NSFetchedResultsControllerDelegate {
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        
-//        print("loaded data")
-//        
-//        let sum = fetchedResultController.fetchedObjects?.reduce(0, { (value, element) -> Double in
-//            
-//            return value + element.price + element.price * (element.state?.tax)!
-//            
-//        })
-//        
-//        print(sum ?? "errow")
-//        
-//    }
-//}

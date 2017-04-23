@@ -13,7 +13,7 @@
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Product" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Product" positionX="-45" positionY="-1" width="128" height="118"/>
+        <element name="Product" positionX="-65" positionY="-1" width="128" height="118"/>
         <element name="State" positionX="-63" positionY="-162" width="128" height="88"/>
     </elements>
 </model>
